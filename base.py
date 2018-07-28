@@ -49,4 +49,4 @@ class MyClient(discord.Client):
 
 
 client = MyClient()
-client.run('NDcyNDczMTcyODAyMDExMTM3.Dj1PeA.0PvrYUQX_uniVGMf1eeqajyP7w8')
+client.run('hidden')
