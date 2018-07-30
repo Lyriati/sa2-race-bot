@@ -1,6 +1,6 @@
 import discord
 import logging
-import time
+import asyncio
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -57,26 +57,27 @@ class MyClient(discord.Client):
 
         if message.content.startswith('!allready'):
             await client.send_message(message.channel, content='10')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='9')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='8')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='7')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='6')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='5')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='4')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='3')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='2')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='1')
-            time.sleep(1)
+            await asyncio.sleep(1)
             await client.send_message(message.channel, content='Go!')
+
 
 
 
