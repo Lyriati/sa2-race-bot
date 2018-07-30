@@ -1,5 +1,6 @@
 import discord
 import logging
+import time
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -18,35 +19,69 @@ class MyClient(discord.Client):
         print("Ready!")
 
 
-  # race management
-        race1 = "ready"
-        race1_status = "ready"
-        if race1 == "started":
-            race1_status = "open"
-        elif race1 != "started":
-            race1_status = "closed"
+ # race management
+        self.race1 = "ready"
+        self.race1_status = "Race 1 Ready!"
+        if self.race1 == "started":
+            self.race1_status = "open"
+        elif self.race1 != "started":
+            self.race1_status = "closed"
 
 
     async def on_message(self, message):
-        client.race1_status = "ready"
 
-        # we do not want the bot to reply to itself
         if message.author.id == self.user.id:
             return
 
         if message.content.startswith('!startrace'):
-            race1 = "started"
+            self.race1 = "started"
             await client.send_message(message.channel, content="Race 1 Opened!")
+            if self.race1 == "started":
+                self.race1_status = "open"
+            elif self.race1 != "started":
+                self.race1_status = "closed"
 
         if message.content.startswith('!hello'):
             await client.send_message(message.channel, content="Hello!")
 
-        if message.content.startswith('!races'):
-            await client.send_message(message.channel, content=print(race1_status))
+        if message.content.startswith('!race1'):
+            await client.send_message(message.channel, content=self.race1_status)
+
+        if message.content.startswith('!stoprace1'):
+            self.race1 = "stopped"
+            if self.race1 == "started":
+                self.race1_status = "open"
+            elif self.race1 != "started":
+                self.race1_status = "closed"
+            await client.send_message(message.channel, content="Race 1 Stopped!")
+
+        if message.content.startswith('!allready'):
+            await client.send_message(message.channel, content='10')
+            time.sleep(1)
+            await client.send_message(message.channel, content='9')
+            time.sleep(1)
+            await client.send_message(message.channel, content='8')
+            time.sleep(1)
+            await client.send_message(message.channel, content='7')
+            time.sleep(1)
+            await client.send_message(message.channel, content='6')
+            time.sleep(1)
+            await client.send_message(message.channel, content='5')
+            time.sleep(1)
+            await client.send_message(message.channel, content='4')
+            time.sleep(1)
+            await client.send_message(message.channel, content='3')
+            time.sleep(1)
+            await client.send_message(message.channel, content='2')
+            time.sleep(1)
+            await client.send_message(message.channel, content='1')
+            time.sleep(1)
+            await client.send_message(message.channel, content='Go!')
+
 
 
 
 
 
 client = MyClient()
-client.run('hidden')
+client.run('NDcyNDczMTcyODAyMDExMTM3.Dj1PeA.0PvrYUQX_uniVGMf1eeqajyP7w8')
