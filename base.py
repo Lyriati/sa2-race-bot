@@ -56,7 +56,7 @@ class MyClient(discord.Client):
         if message.content.startswith('!allready'):
             for i in range(10):
                 await client.send_message(message.channel, content=str(countdown))
-                countdown = countdown -1
+                countdown = countdown - 1
             print("Go!")
 
 
