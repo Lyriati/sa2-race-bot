@@ -46,4 +46,4 @@ async def on_message(message):
             await message.channel.send("Go!")
 
 
-client.run('xxxxx)
+client.run('xxxxx')
