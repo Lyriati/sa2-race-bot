@@ -44,15 +44,7 @@ class MyClient(discord.Client):
 
         if message.content.startswith('!race1'):
             await client.send_message(message.channel, content= str(race1_status))
-
-        if message.content.startswith('!stoprace1'):
-            self.race1 = "stopped"
-            if self.race1 == "started":
-                self.race1_status = "open"
-            elif self.race1 != "started":
-                self.race1_status = "closed"
-            await client.send_message(message.channel, content="Race 1 Stopped!")
-
+           
         if message.content.startswith('!allready'):
             for i in range(10):
                 await client.send_message(message.channel, content=str(countdown))
