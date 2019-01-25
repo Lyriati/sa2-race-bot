@@ -30,22 +30,20 @@ class MyClient(discord.Client):
 
     async def on_message(self, message):
 
+        countdown = 10
+        
         if message.author.id == self.user.id:
             return
 
         if message.content.startswith('!startrace'):
-            self.race1 = "started"
-            await client.send_message(message.channel, content="Race 1 Opened!")
-            if self.race1 == "started":
-                self.race1_status = "open"
-            elif self.race1 != "started":
-                self.race1_status = "closed"
+            race1 = "started"
+            await client.send_message(message.channel, content="Race 1 Opened!"
 
         if message.content.startswith('!hello'):
             await client.send_message(message.channel, content="Hello!")
 
         if message.content.startswith('!race1'):
-            await client.send_message(message.channel, content=self.race1_status)
+            await client.send_message(message.channel, content= str(race1_status))
 
         if message.content.startswith('!stoprace1'):
             self.race1 = "stopped"
@@ -56,27 +54,10 @@ class MyClient(discord.Client):
             await client.send_message(message.channel, content="Race 1 Stopped!")
 
         if message.content.startswith('!allready'):
-            await client.send_message(message.channel, content='10')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='9')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='8')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='7')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='6')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='5')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='4')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='3')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='2')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='1')
-            await asyncio.sleep(1)
-            await client.send_message(message.channel, content='Go!')
+            for i in range(10):
+                await client.send_message(message.channel, content=str(countdown))
+                countdown = countdown -1
+            print("Go!")
 
 
 
