@@ -1,61 +1,49 @@
 import discord
-import logging
+import random
 import asyncio
+from discord.ext import commands
 
-logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
+description = '''An example bot to showcase the discord.ext.commands extension
+module.
+There are a number of utility commands being showcased here.'''
+bot = commands.Bot(command_prefix='?', description=description)
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print("Current discord.py version")
-        print(discord.__version__)
-        print('Logged in as')
-        print(self.user.name)
-        print(self.user.id)
-        print('---------')
-        print("Ready!")
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
 
 
- # race management
-        self.race1 = "ready"
-        self.race1_status = "Race 1 Ready!"
-        if self.race1 == "started":
-            self.race1_status = "open"
-        elif self.race1 != "started":
-            self.race1_status = "closed"
 
+@client.event
+async def on_message(message):
+    countdown = 10
+    if message.author == client.user:
+        return
 
-    async def on_message(self, message):
+    if message.content.startswith('$hello'):
+        if message.author.id == 83299750824120320:
+            await message.channel.send("Goodbye Lyri.")
+        else:
+            await message.channel.send('Hello!')
 
-        countdown = 10
-        
-        if message.author.id == self.user.id:
-            return
-
-        if message.content.startswith('!startrace'):
-            race1 = "started"
-            await client.send_message(message.channel, content="Race 1 Opened!"
-
-        if message.content.startswith('!hello'):
-            await client.send_message(message.channel, content="Hello!")
-
-        if message.content.startswith('!race1'):
-            await client.send_message(message.channel, content= str(race1_status))
-           
-        if message.content.startswith('!allready'):
-            for i in range(10):
-                await client.send_message(message.channel, content=str(countdown))
+    if message.content == '$countdown':
+        if message.author.id == 83299750824120320:
+            await message.channel.send("No countdown for you!")
+        else:
+            await message.channel.send("The race is starting!")
+            await asyncio.sleep(1)
+            for j in range(1):
+                await message.channel.send(str(countdown) + " seconds!")
+                await asyncio.sleep(5)
+            countdown = 5
+            for i in range(5):
+                await message.channel.send(str(countdown))
+                await asyncio.sleep(1)
                 countdown = countdown - 1
-            print("Go!")
+            await asyncio.sleep(0)
+            await message.channel.send("Go!")
 
 
-
-
-
-
-
-client = MyClient()
-client.run('xxxxxxx')
+client.run('NDcyNDczMTcyODAyMDExMTM3.Dy0LQA.z3sK1LOVLg1i05U7JG2fhlTemgU')
